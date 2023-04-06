@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const connection = require('./BackEnd/db/connection');
+const connection = require('./backend/db/connection');
 
 // Enable CORS
 app.use(cors());
@@ -27,27 +27,27 @@ connection
   });
 
 // Login route
-const loginRouter = require('./BackEnd/routes/login');
+const loginRouter = require('./backend/routes/login');
 app.use('/login', loginRouter);
 
 // Get current user's information
-const myUserRouter = require('./BackEnd/routes/myuser');
+const myUserRouter = require('./backend/routes/myuser');
 app.use('/myuser', myUserRouter);
 
 //Get all user's information
-const usersRouter = require('./BackEnd/routes/users');
+const usersRouter = require('./backend/routes/users');
 app.use('/users', usersRouter);
 
 // Define endpoint for password reset request
-const lostRouter = require('./BackEnd/routes/lost');
+const lostRouter = require('./backend/routes/lost');
 app.use('/password/lost', lostRouter);
 
 //reset password
-const resetRouter = require('./BackEnd/routes/reset');
+const resetRouter = require('./backend/routes/reset');
 app.use('/password/reset', resetRouter);
 
 //Photos Route // Get current user's photos
-const photoRouter = require('./BackEnd/routes/photo');
+const photoRouter = require('./backend/routes/photo');
 app.use('/photo', photoRouter);
 
 // Get all user's photos - based on the profile Route
