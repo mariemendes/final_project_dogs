@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const tokenPassword = 'mariane-project-jwt';
-const UserModels = require('../models/UserModels.js');
+const UserModels = require('../../models/UserModels.js');
 
 // Login route
 router.post('/', async (req, res) => {

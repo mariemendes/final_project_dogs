@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UserModels = require('../models/UserModels');
-const Photo = require('../models/PhotoModels.js');
+const UserModels = require('../../models/UserModels');
+const Photo = require('../../models/PhotoModels.js');
 
 //Get all user's information
 router.get('/', async (req, res) => {

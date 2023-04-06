@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UserModels = require('../models/UserModels.js');
-const tokenVerify = require('../middlewares/tokenVerify.js');
+const UserModels = require('../../models/UserModels.js');
+const tokenVerify = require('../../middlewares/tokenVerify.js');
 
 router.get('/', tokenVerify, async (req, res) => {
   const { username } = req.user;

@@ -1,43 +1,57 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './components/Home';
-import Footer from './components/Footer';
-import Login from './components/Login/Login';
-import { UserStorage } from './UserContext';
-import User from './components/User/User';
-import ProtectedRoute from './components/Helper/ProtectedRoute';
-import Photo from './components/Photo/Photo';
-import UserProfile from './components/User/UserProfile';
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+const connection = require('./BackEnd/db/connection');
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <UserStorage>
-          <Header />
-          <main className="AppBody">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="login/*" element={<Login />} />
-              <Route
-                path="account/*"
-                element={
-                  <ProtectedRoute>
-                    <User />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="photo/:id" element={<Photo />} />
-              <Route path="profile/:username" element={<UserProfile />} />
-            </Routes>
-          </main>
-          <Footer />
-        </UserStorage>
-      </BrowserRouter>
-    </div>
-  );
-}
+// Enable CORS
+app.use(cors());
 
-export default App;
+// Serve static files
+app.use(express.static('public'));
+
+// Parse incoming requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Connect to MongoDB
+connection
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log('Connected and listening');
+    });
+  })
+  .catch((err) => {
+    console.log(`Error connecting to MongoDB: ${JSON.stringify(err)}`);
+  });
+
+// Login route
+const loginRouter = require('./BackEnd/routes/login');
+app.use('/login', loginRouter);
+
+// Get current user's information
+const myUserRouter = require('./BackEnd/routes/myuser');
+app.use('/myuser', myUserRouter);
+
+//Get all user's information
+const usersRouter = require('./BackEnd/routes/users');
+app.use('/users', usersRouter);
+
+// Define endpoint for password reset request
+const lostRouter = require('./BackEnd/routes/lost');
+app.use('/password/lost', lostRouter);
+
+//reset password
+const resetRouter = require('./BackEnd/routes/reset');
+app.use('/password/reset', resetRouter);
+
+//Photos Route // Get current user's photos
+const photoRouter = require('./BackEnd/routes/photo');
+app.use('/photo', photoRouter);
+
+// Get all user's photos - based on the profile Route
+app.use('/users/:username', usersRouter);
+
+// Get a specific photo - based on the photo Route and Delete photo
+app.use('/photo/:id', photoRouter);
