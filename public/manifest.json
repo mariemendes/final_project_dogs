@@ -1,0 +1,9 @@
+{
+  "short_name": "Dogs",
+  "name": "Dogs - Social media for Dogs",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": " #90a9a5",
+  "background_color": "#ffffff"
+}
