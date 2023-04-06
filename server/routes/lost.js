@@ -11,8 +11,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'postmaster@sandbox6c24c00991b64155a41d3cef730b3afe.mailgun.org',
-    pass: 'a214713e21ecd28d17d39ab9287f427f-81bd92f8-fdc03870',
+    user: ${{ secrets.MAINGUN_USERNAME }},
+    pass: ${{ secrets.MAINGUN_PASS }},
   },
 });
 
