@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UserModels = require('../../models/UserModels.js');
-const ResetRequest = require('../../models/ResetModels.js');
+const UserModels = require('../../backend/models/UserModels.js');
+const ResetRequest = require('../../backend/models/ResetModels.js');
 const nodemailer = require('nodemailer');
 const Mailgun = require('mailgun-js');
 
