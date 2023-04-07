@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     // user: MAINGUN_USERNAME,
     user: 'postmaster@sandbox5c9e354a00b04e6caf4bbc419fe72bb9.mailgun.org',
     // user: MAINGUN_USERNAME,
-    // pass: '045c4ff4ac7a45969cec7650cc318501-81bd92f8-2a3d6980',
+    pass: '045c4ff4ac7a45969cec7650cc318501-81bd92f8-2a3d6980',
   },
 });
 
@@ -23,6 +23,10 @@ router.post('/', async (req, res) => {
   try {
     // Find user with matching email
     const user = await UserModels.findOne({ email });
+    if (user === null) {
+      res.status(400).json({ message: 'Email not found' });
+      return;
+    }
     // Generate random token for reset request
     const token = Math.floor(100000 + Math.random() * 900000).toString();
 
