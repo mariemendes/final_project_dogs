@@ -13,7 +13,7 @@ Social media platform for dogs made using React. It allows dog owners and dog lo
 
 To run the app locally, follow these steps:
 
-1.  Clone the repository: git clone https://github.com/your-username/react-doggos.git
+1.  Clone the repository: git clone https://github.com/mariemendes/final_project_dogs_Mariane_Mendes
 2.  Install dependencies into server-side(server folder) **AND** client-server(src folder) side folder:
     `npm install`
 3.  a) After that you can run into the server side:
