@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UserModels = require('../../models/UserModels.js');
-const ResetRequest = require('../../models/ResetModels.js');
+const UserModels = require('../models/UserModels');
+const ResetRequest = require('../models/ResetModels.js');
 
 //reset password
 // Define endpoint for password reset verification
